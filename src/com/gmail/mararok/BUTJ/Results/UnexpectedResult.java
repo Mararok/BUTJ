@@ -7,12 +7,14 @@ package com.gmail.mararok.BUTJ.Results;
 
 public class UnexpectedResult {
 	private String matchMessage;
-	private String sourceName;
+	private String sourceName = "|EMPTY|";
 	private int lineNumber;
 	
 	public UnexpectedResult(String matchMessage, StackTraceElement position) {
 		this.matchMessage = matchMessage;
-		this.sourceName = position.getFileName();
+		if (position.getFileName() != null) {
+			this.sourceName = position.getFileName().split("\\.")[0];
+		}
 		this.lineNumber = position.getLineNumber();
 	}
 	

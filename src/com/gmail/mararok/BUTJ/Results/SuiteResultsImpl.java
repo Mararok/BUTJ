@@ -5,22 +5,27 @@
  */
 package com.gmail.mararok.BUTJ.Results;
 
-import com.gmail.mararok.BUTJ.TestElement;
+import com.gmail.mararok.BUTJ.TestElementImpl;
 
-public class SuiteResultsImpl extends CaseResultsImpl implements SuiteResults {
+public class SuiteResultsImpl extends ResultsImpl implements SuiteResults {
 	private int suitesAmount;
 	private int casesAmount;
+	private int testsAmount;
 	
-	public SuiteResultsImpl(TestElement<SuiteResultsImpl> element) {
+	public SuiteResultsImpl(TestElementImpl element) {
 		super(element);
 	}
 
-	public void incSuites() {
-		++suitesAmount;
+	public void addSuites(int amount) {
+		suitesAmount += amount;
 	}
 	
-	public void incCases() {
-		++casesAmount;
+	public void addCases(int amount) {
+		casesAmount += amount;
+	}
+	
+	public void addTests(int amount) {
+		testsAmount += amount;
 	}
 	
 	@Override
@@ -43,6 +48,11 @@ public class SuiteResultsImpl extends CaseResultsImpl implements SuiteResults {
 	@Override
 	public int getCasesAmount() {
 		return casesAmount;
+	}
+	
+	@Override
+	public int getTestsAmount() {
+		return testsAmount;
 	}
 
 }

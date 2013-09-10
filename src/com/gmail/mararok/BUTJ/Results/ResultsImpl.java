@@ -6,15 +6,15 @@
 package com.gmail.mararok.BUTJ.Results;
 
 import com.gmail.mararok.BUTJ.Reporter;
-import com.gmail.mararok.BUTJ.TestElement;
+import com.gmail.mararok.BUTJ.TestElementImpl;
 
 public class ResultsImpl {
-	private TestElement element;
+	private TestElementImpl element;
 	
 	private long startTime;
 	private long executeTime;
 	
-	public ResultsImpl(TestElement element) {
+	public ResultsImpl(TestElementImpl element) {
 		this.element = element;
 	}
 
@@ -31,18 +31,18 @@ public class ResultsImpl {
 	}
 	
 	protected void onStart() {
-		startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
 	}
 	
 	protected  void onEnd() {
-		executeTime = System.nanoTime()-startTime;
-	}
-	
-	protected TestElement getElement() {
-		return element;
+		executeTime = System.currentTimeMillis()-startTime;
 	}
 	
 	protected Reporter getReporter() {
 		return getElement().getReporter();
+	}
+	
+	private TestElementImpl getElement() {
+		return element;
 	}
 }

@@ -8,13 +8,13 @@ package com.gmail.mararok.BUTJ.Results;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.gmail.mararok.BUTJ.TestEnviroment;
+import com.gmail.mararok.BUTJ.TestEnviromentImpl;
 
 public class TestResultsImpl extends ResultsImpl implements TestResults {
 	private String description;
 	private List<UnexpectedResult> unexceptedResults;
 	
-	public TestResultsImpl(TestEnviroment test) {
+	public TestResultsImpl(TestEnviromentImpl test) {
 		super(test);
 		this.unexceptedResults = new LinkedList<UnexpectedResult>();
 	}

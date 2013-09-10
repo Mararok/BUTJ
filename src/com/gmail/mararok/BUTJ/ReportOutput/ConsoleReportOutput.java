@@ -5,56 +5,95 @@
  */
 package com.gmail.mararok.BUTJ.ReportOutput;
 
-import com.gmail.mararok.BUTJ.Results.TestResultsImpl;
+import java.util.List;
+
+import com.gmail.mararok.BUTJ.Results.CaseResults;
+import com.gmail.mararok.BUTJ.Results.ReportResults;
+import com.gmail.mararok.BUTJ.Results.SuiteResults;
+import com.gmail.mararok.BUTJ.Results.TestResults;
+import com.gmail.mararok.BUTJ.Results.UnexpectedResult;
 
 public class ConsoleReportOutput implements ReportOutput {
+	private StringBuilder paddingLevelBuffer = new StringBuilder();
+	private int paddingLevel;
+	@Override
+	public void onReportStart(ReportResults results) {
+		printf("Report %s \n",results.getName());
+		println("##############################################################");
+		incLevel();
+	}
 
 	@Override
-	public void onReportStart(String reportName) {
-		// TODO Auto-generated method stub
+	public void onReportEnd(ReportResults results) {
+		decLevel();
+		println("##############################################################");
+		printf("Report end in %f s \n",(double)results.getExecuteTime()/1000.0);
+		printf("%d suites, %d cases, %d tests \n",
+				results.getSuitesAmount(),results.getCasesAmount(),results.getTestsAmount());
+	}
 
+	@Override
+	public void onSuiteStart(SuiteResults results) {
+		printf("S:%s \n",results.getName());
+		incLevel();
+	}
+
+	@Override
+	public void onSuiteEnd(SuiteResults results) {
+		decLevel();
+		printf("S:%s end in %f s \n",results.getName(),(double)results.getExecuteTime()/1000.0);
+	}
+
+	@Override
+	public void onCaseStart(CaseResults results) {
+		printf("C:%s \n",results.getName());
+		incLevel();
+		
+	}
+
+	@Override
+	public void onCaseEnd(CaseResults results) {
+		decLevel();
+		printf("C:%s end in %f s \n",results.getName(),(double)results.getExecuteTime()/1000.0);
+	}
+
+	@Override
+	public void onTestStart(TestResults results) {
+		printf("%s ",results.getName());
+		incLevel();
+	}
+
+	@Override
+	public void onTestEnd(TestResults results) {
+		List<UnexpectedResult> ers = results.getUnexpectedResults();
+		if (ers.size() > 0 ) {
+			println("");
+			for (UnexpectedResult er : ers) {
+				printf("%s:%d expected %s \n",er.getSourceName(),er.getLineNumber(),er.getMatchMessage());
+			}
+			decLevel();
+			printf("%s end in %f s \n",results.getName(),(double)results.getExecuteTime()/1000.0);
+		} else {
+			System.out.printf("end in %f s \n",(double)results.getExecuteTime()/1000.0);
+			decLevel();
+		}
 	}
 	
-	@Override
-	public void onReportEnd(long generateTime) {
-		// TODO Auto-generated method stub
-
+	private void println(String message) {
+		System.out.println(paddingLevelBuffer.toString()+message);
 	}
-
-	@Override
-	public void onSuiteStart(String fullName) {
-		// TODO Auto-generated method stub
-
+	
+	private void incLevel() {
+		++paddingLevel;
+		paddingLevelBuffer.append("#");
 	}
-
-	@Override
-	public void onSuiteEnd() {
-		// TODO Auto-generated method stub
-
+	
+	private void decLevel() {
+		--paddingLevel;
+		paddingLevelBuffer.setLength(paddingLevel);
 	}
-
-	@Override
-	public void onCaseStart(String fullName) {
-		// TODO Auto-generated method stub
-
+	
+	private void printf(String format, Object...args) {
+		System.out.printf(paddingLevelBuffer.toString()+format,args);
 	}
-
-	@Override
-	public void onCaseEnd() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onTestStart(TestResultsImpl results) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onTestEnd(TestResultsImpl results) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

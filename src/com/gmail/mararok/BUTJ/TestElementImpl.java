@@ -5,19 +5,18 @@
  */
 package com.gmail.mararok.BUTJ;
 
-import com.gmail.mararok.BUTJ.Results.ResultsImpl;
+import com.gmail.mararok.BUTJ.Results.Results;
 
-public abstract class TestElement<Results extends ResultsImpl> {
+public abstract class TestElementImpl {
 	private String name;
-	private TestSuite parent;
-	protected Results results;
+	private TestElementContainer parent;
 	
-	TestElement(String name) {
+	TestElementImpl(String name) {
 		this.name = name;
 		this.parent = null;
 	}
 	
-	abstract void run();
+	public abstract void run();
 	
 	public String getName() {
 		return this.name;
@@ -30,15 +29,21 @@ public abstract class TestElement<Results extends ResultsImpl> {
 		return getName();
 	}
 	
-	protected TestSuite getParent() {
+	public TestElementContainer getParent() {
 		return parent;
 	}
 	
-	void setParent(TestSuite newParent) {
+	public void setParent(TestElementContainer newParent) {
+		if (getParent() != null) {
+			getParent().remove(this);
+		}
+		
 		this.parent = newParent;
 	}
 	
-	Reporter getReporter() {
+	public Reporter getReporter() {
 		return parent.getReporter();
 	}
+	
+	public abstract Results getResults();
 }
