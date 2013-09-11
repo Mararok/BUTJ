@@ -5,34 +5,41 @@
  */
 package com.gmail.mararok.BUTJ.Helpers;
 
-import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
 
-public class MockMethod {
-	private MockObject mockObject;
-	private Method method;
+public class MockMethod<T> {
+	private String methodName;
 	private HashMap<String, Object> invokeResults; 
+	private HashMap<String,Exception> invokeThrows; 
 	
-	public MockMethod(MockObject mockObject, Method method) {
-		this.mockObject = mockObject;
-		this.method = method;
+	public MockMethod(String methodName) {
+		this.methodName = methodName;
+		invokeResults = new HashMap<String, Object>();
+		invokeThrows = new HashMap<String,Exception>();
 	}
 	
-	public void addInvokeResults(Object returnValue, Object... args) {
-		
+	public void addInvokeResults(Object returnValue, Object[] args) {
+		invokeResults.put(getArgsString(args),returnValue);
 	}
 	
-	private boolean checkArgs(Object... args) {
-		Class<?>[] parameters  = method.getParameterTypes();
-		if (args.length != parameters.length) {
-			throw new RuntimeException(String.format("[MockObject] %s.%s not enough arguments ",));
-			return false;
-		}
-		
-		for (int i = 0, len = args.length; i < len; ++i) {
-			if (!parameters[i].isInstance(args)) {
-				return false;
-			}
-		}
+	public Object getInvokeResults(Object[] args) {
+		return invokeResults.get(getArgsString(args));
+	}
+	
+	public void addInvokeThrow(Exception exception, Object[] args) {
+		invokeThrows.put(getArgsString(args),exception);
+	}
+	
+	public Exception getInvokeThrows(Object[] args) {
+		return invokeThrows.get(getArgsString(args));
+	}
+	
+	public String getName() {
+		return methodName;
+	}
+	
+	public static String getArgsString(Object[] args) {
+		return (args == null)? "[]" : Arrays.toString(args);
 	}
 }

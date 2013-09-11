@@ -3,10 +3,14 @@
  * The MIT License
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
  */
-package com.gmail.mararok.BUTJ;
+package com.gmail.mararok.BUTJ.Test;
 
 import java.lang.reflect.Method;
 
+import com.gmail.mararok.BUTJ.IGNORE;
+import com.gmail.mararok.BUTJ.TEST;
+import com.gmail.mararok.BUTJ.TestCase;
+import com.gmail.mararok.BUTJ.TestEnviroment;
 import com.gmail.mararok.BUTJ.Results.CaseResultsImpl;
 import com.gmail.mararok.BUTJ.Results.Results;
 

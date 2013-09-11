@@ -6,5 +6,8 @@
 package com.gmail.mararok.BUTJ.Helpers;
 
 public class NeedHelper {
-
+	private MockObjectBuilder mockObjectBuilder =  new MockObjectBuilder();
+	public MockObjectBuilder MockObject() {
+		return mockObjectBuilder;
+	}
 }

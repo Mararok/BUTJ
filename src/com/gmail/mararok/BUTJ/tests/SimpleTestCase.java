@@ -24,6 +24,13 @@ public class SimpleTestCase extends TestCase {
 	}
 	
 	@TEST
+	public void toBeInstanceOf(TestEnviroment it) {
+		Integer obj = 1;
+		it.expect(obj).toBeInstanceOf(Integer.class);
+		it.expect(obj).not().toBeInstanceOf(Void.class);
+	}
+	
+	@TEST
 	public void toBeNull(TestEnviroment it) {
 		Object obj1 = null;
 		Object obj2 = 1;
@@ -54,6 +61,18 @@ public class SimpleTestCase extends TestCase {
 		
 		it.expect(false).not().toBeTrue();
 		it.expect(obj2).not().toBeTrue();
+	}
+	
+	@TEST
+	public void toBeEqual(TestEnviroment it) {
+		Integer obj1 = 1;
+		Integer obj2 = 1;
+		Boolean obj3 = false;
+		it.expect(obj1).toBeEqual(obj2);
+		it.expect(obj1).not().toBeEqual(null);
+		it.expect(obj1).not().toBeEqual(2);
+		it.expect(obj1).not().toBeEqual(obj3);
+		it.expect(obj1).not().toBeEqual(obj3);
 	}
 	
 }

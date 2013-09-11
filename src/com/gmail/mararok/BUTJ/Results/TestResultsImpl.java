@@ -8,7 +8,7 @@ package com.gmail.mararok.BUTJ.Results;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.gmail.mararok.BUTJ.TestEnviromentImpl;
+import com.gmail.mararok.BUTJ.Test.TestEnviromentImpl;
 
 public class TestResultsImpl extends ResultsImpl implements TestResults {
 	private String description;

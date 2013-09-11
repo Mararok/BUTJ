@@ -3,16 +3,17 @@
  * The MIT License
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
  */
-package com.gmail.mararok.BUTJ;
+package com.gmail.mararok.BUTJ.Test;
 
+import com.gmail.mararok.BUTJ.TestCase;
 import com.gmail.mararok.BUTJ.Results.CaseResults;
 import com.gmail.mararok.BUTJ.Results.Results;
 import com.gmail.mararok.BUTJ.Results.SuiteResults;
 import com.gmail.mararok.BUTJ.Results.SuiteResultsImpl;
 
-public class TestSuiteImpl extends TestElementContainer {
+public class TestSuite extends TestElementContainer {
 	private SuiteResultsImpl results;
-	public TestSuiteImpl(String name) {
+	public TestSuite(String name) {
 		super(name);
 		results = new SuiteResultsImpl(this);
 	}
@@ -24,7 +25,7 @@ public class TestSuiteImpl extends TestElementContainer {
 			testElement.run();
 			Results r = testElement.getResults();
 			
-			if (testElement instanceof TestSuiteImpl) {
+			if (testElement instanceof TestSuite) {
 				results.addSuites(1+((SuiteResults)r).getSuitesAmount());
 				results.addCases( ((SuiteResults)r).getCasesAmount());
 			} else {
@@ -40,6 +41,10 @@ public class TestSuiteImpl extends TestElementContainer {
 		add(new TestCaseImpl(testCase));
 	}
 
+	public void addSuite(TestSuite suite) {
+		add(suite);
+	}
+	
 	@Override
 	public Results getResults() {
 		return results;

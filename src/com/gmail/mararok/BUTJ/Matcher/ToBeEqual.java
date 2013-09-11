@@ -6,30 +6,29 @@
 package com.gmail.mararok.BUTJ.Matcher;
 
 public class ToBeEqual extends Matcher {
-	private Comparable<Object> expected;
-	public ToBeEqual(Object current, Comparable<Object> expected) {
+	private Object expected;
+	public ToBeEqual(Object current, Object expected) {
 		super(current);
 		this.expected = expected;
 	}
 	
 	@Override
 	public boolean match() {
-		Class<?> matchClass = expected.getClass();
-		if (matchClass == current.getClass()) {
-			return expected.compareTo(current) == 0;
-		}
+		if (current == null) {
+			return (expected == null)? true : expected.equals(current); 
+		} 
 		
-		return false;
+		return current.equals(expected);
 	}
 
 	@Override
 	public String getMatchMessage() {
-		return current+" to be equal "+expected;
+		return current+" to be equals "+expected;
 	}
 
 	@Override
 	public String getMatchNegationMessage() {
-		return current+" not to be equal "+expected;
+		return current+" not to be equals "+expected;
 	}
 
 }

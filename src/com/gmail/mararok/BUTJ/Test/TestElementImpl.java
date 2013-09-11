@@ -3,7 +3,7 @@
  * The MIT License
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
  */
-package com.gmail.mararok.BUTJ;
+package com.gmail.mararok.BUTJ.Test;
 
 import com.gmail.mararok.BUTJ.Results.Results;
 

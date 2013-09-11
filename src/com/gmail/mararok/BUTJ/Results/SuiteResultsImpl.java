@@ -5,7 +5,7 @@
  */
 package com.gmail.mararok.BUTJ.Results;
 
-import com.gmail.mararok.BUTJ.TestElementImpl;
+import com.gmail.mararok.BUTJ.Test.TestElementImpl;
 
 public class SuiteResultsImpl extends ResultsImpl implements SuiteResults {
 	private int suitesAmount;

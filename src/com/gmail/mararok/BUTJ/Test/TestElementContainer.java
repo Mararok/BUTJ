@@ -3,7 +3,7 @@
  * The MIT License
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
  */
-package com.gmail.mararok.BUTJ;
+package com.gmail.mararok.BUTJ.Test;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,7 +24,7 @@ public abstract class TestElementContainer extends TestElementImpl {
 		getList().remove(element);
 	}
 	
-	List<TestElementImpl> getList() {
+	protected List<TestElementImpl> getList() {
 		return elements;
 	}
 }

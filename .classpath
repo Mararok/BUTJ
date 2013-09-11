@@ -7,5 +7,7 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/BUTJ/libs/javassist/javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/PROJEKTY/JAVA/BUTJ/libs/reflections-0.9.9-RC1.jar"/>
+	<classpathentry kind="lib" path="libs/guava-15.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
