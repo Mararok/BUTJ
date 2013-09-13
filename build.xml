@@ -1,0 +1,36 @@
+<project name="BUTJ" default="main">
+	<property name="projectHome" location="." />
+	<property name="major.minor" value="0.1" />
+
+	<propertyfile file="${projectHome}/build.number" comment="Build Number for ANT. Edit not!">
+		<entry key="build.number" type="int" default="1" />
+	</propertyfile>
+
+	<property file="${projectHome}/build.number" />
+	<property name="version" value="${major.minor}"/>
+
+	<target name="clean">
+		<delete dir="${projectHome}/build"/>
+		<delete file="${projectHome}/BUTJ.manifest"/>
+	</target>
+
+	<target name="buildJAR">
+		<copy file="${projectHome}/BUTJ.raw.manifest" overwrite="true" tofile="${projectHome}/BUTJ.manifest"/>
+		<replace file="${projectHome}/BUTJ.manifest" value="no">
+			<replacefilter token="@VERSION" value="${version}"/>
+			<replacefilter token="@BUILD_NUMBER" value="${build.number}"/>
+		</replace>
+		
+		<jar destfile="${projectHome}/build/BUTJ.jar" manifest="${projectHome}/BUTJ.manifest" update="true" basedir="${projectHome}/bin" excludes="com/gmail/mararok//BUTJ/tests/**">
+			<fileset dir="${projectHome}/" includes="LICENSE" />
+		</jar>
+	</target>
+
+	<target name="incrementBuildNumber">
+		<propertyfile file="${projectHome}/build.number" comment="Build Number for ANT. Edit not!">
+			<entry key="build.number" type="int" operation="+" default="1" />
+		</propertyfile>
+	</target>
+
+	<target name="main" depends="clean,buildJAR,incrementBuildNumber" />
+</project>

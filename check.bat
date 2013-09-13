@@ -1,2 +1,0 @@
-javap XTestCaseImpl 
-pause

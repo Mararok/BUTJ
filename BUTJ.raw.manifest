@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Name: com/gmail/mararok/BUTJ/
+Specification-Title: Better Unit Tests Java
+Specification-Version: @VERSION
+Specification-Vendor: Mararok
+Implementation-Title: com.gmail.mararok.BUTJ
+Implementation-Version: @BUILD_NUMBER
+Implementation-Vendor: Mararok
