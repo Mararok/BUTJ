@@ -7,6 +7,7 @@ package com.gmail.mararok.BUTJ;
 
 public class TestCase {
 	private String name;
+	public TestEnviroment it;
 	
 	public TestCase(String name) {
 		this.name = name;

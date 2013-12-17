@@ -43,7 +43,8 @@ public class TestEnviromentImpl extends TestElementImpl implements TestEnviromen
 	public void run() {
 		try {
 			results.onStart();
-				this.testMethod.invoke(context,this);
+				context.it = this;
+				this.testMethod.invoke(context);
 			results.onEnd();
 			
 		} catch (IllegalAccessException e) {
@@ -130,11 +131,11 @@ public class TestEnviromentImpl extends TestElementImpl implements TestEnviromen
 		String message = null;
 		if (negation) {
 			if (!matcher.matchNegation()) {
-				message = matcher.getMatchMessage();
+				message = matcher.getMatchNegationMessage();
 			}
 		} else {
 			if (!matcher.match()) {
-				message = matcher.getMatchNegationMessage();
+				message = matcher.getMatchMessage();
 			}
 		}
 		negation = false;

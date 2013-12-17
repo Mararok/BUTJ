@@ -10,14 +10,12 @@ import java.lang.reflect.Method;
 import com.gmail.mararok.BUTJ.IGNORE;
 import com.gmail.mararok.BUTJ.TEST;
 import com.gmail.mararok.BUTJ.TestCase;
-import com.gmail.mararok.BUTJ.TestEnviroment;
 import com.gmail.mararok.BUTJ.Results.CaseResultsImpl;
 import com.gmail.mararok.BUTJ.Results.Results;
 
 public class TestCaseImpl extends TestElementContainer {
 	private CaseResultsImpl results;
 	private TestCase testCase;
-	
 	public TestCaseImpl(TestCase testCase) {
 		super(testCase.getName());
 		results = new CaseResultsImpl(this);
@@ -50,10 +48,7 @@ public class TestCaseImpl extends TestElementContainer {
 	
 	private boolean isTest(Method method) {
 		if (method.getAnnotation(TEST.class) != null && method.getAnnotation(IGNORE.class) == null) {
-			Class<?>[] parameters = method.getParameterTypes();
-			if (parameters.length > 0 && parameters[0] == TestEnviroment.class) {
-				return true;
-			}
+			return true;
 		}
 		
 		return false;	
